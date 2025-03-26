@@ -5,6 +5,8 @@ public class BallController : MonoBehaviour
 {
     public int ballSpeed = 1;
 
+    public CPUController aiAgent;
+
     public GameObject palaIzquierda;
     public GameObject palaDerecha;
 
@@ -27,6 +29,7 @@ public class BallController : MonoBehaviour
             transform.position = Vector2.zero;
             cpuScore++;
             cpuText.text = cpuScore.ToString();
+            aiAgent.GiveReward(+1f);
             Vector2 direction = new Vector2(CoordAleatoria(), CoordAleatoria());
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(direction * ballSpeed, ForceMode2D.Force);
@@ -35,6 +38,7 @@ public class BallController : MonoBehaviour
             transform.position = Vector2.zero;
             playerScore++;
             playerText.text = playerScore.ToString();
+            aiAgent.GiveReward(-1f);
             Vector2 direction = new Vector2(CoordAleatoria(), CoordAleatoria());
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(direction * ballSpeed, ForceMode2D.Force);
@@ -48,37 +52,9 @@ public class BallController : MonoBehaviour
         return posibilidades[aleatorio];        
     }
 
-    public void ModifySpeed(float modifier, float duration) {
-        ballSpeed = Mathf.RoundToInt(ballSpeed * modifier); 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = rb.linearVelocity.normalized * ballSpeed;
-
-        Invoke(nameof(ResetBallSpeed), duration);
-    }
-
-    public void ModifyPaddleSize(GameObject paddle, float modifier, float duration) {
-        paddle.transform.localScale = new Vector3(
-            paddle.transform.localScale.x,
-            paddle.transform.localScale.y * modifier,
-            paddle.transform.localScale.z);
-
-        // Invoke(nameof(() => ResetPaddleSize(paddle, modifier)), duration);
-        //Invoke(nameof((ResetPaddleSize(paddle, modifier), duration)));
-    }
-
-    private void ResetBallSpeed() {
-        ballSpeed = 200; // Cambia este valor si quieres que el valor original sea distinto
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = rb.linearVelocity.normalized * ballSpeed;
-    }
-
-    private void ResetPaddleSize(GameObject paddle, float modifier) {
-        // Restablece el tamaño original dividiendo por el mismo modificador
-        paddle.transform.localScale = new Vector3(
-            paddle.transform.localScale.x,
-            paddle.transform.localScale.y / modifier,
-            paddle.transform.localScale.z);
-
-       
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("CPU")) {
+            aiAgent.GiveReward(+0.5f); // Recompensa positiva
+        }
     }
 }
