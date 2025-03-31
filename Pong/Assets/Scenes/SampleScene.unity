@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   learningRate: 0.1
   discountFactor: 0.9
-  explorationRate: 1.5
+  explorationRate: 0.1
   speed: 5
 --- !u!1 &818163329
 GameObject:
