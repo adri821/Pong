@@ -5,7 +5,7 @@ public class BallController : MonoBehaviour
 {
     public int ballSpeed = 1;
 
-    public CPUController aiAgent;
+   // public CPUController aiAgent;
 
     public GameObject palaIzquierda;
     public GameObject palaDerecha;
@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
             transform.position = Vector2.zero;
             cpuScore++;
             cpuText.text = cpuScore.ToString();
-            aiAgent.GiveReward(+1f);
+           // aiAgent.GiveReward(+10f);
             Vector2 direction = new Vector2(CoordAleatoria(), CoordAleatoria());
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(direction * ballSpeed, ForceMode2D.Force);
@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour
             transform.position = Vector2.zero;
             playerScore++;
             playerText.text = playerScore.ToString();
-            aiAgent.GiveReward(-1f);
+           // aiAgent.GiveReward(-10f);
             Vector2 direction = new Vector2(CoordAleatoria(), CoordAleatoria());
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(direction * ballSpeed, ForceMode2D.Force);
@@ -54,7 +54,7 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("CPU")) {
-            aiAgent.GiveReward(+0.5f); // Recompensa positiva
+           // aiAgent.GiveReward(+0.5f); // Recompensa positiva
         }
     }
 }
