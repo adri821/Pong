@@ -397,14 +397,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b79f173754e504797b644fd73692f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 200
-  palaIzquierda: {fileID: 432491928}
-  palaDerecha: {fileID: 727447511}
+  ballSpeed: 5
   offset: 5
   playerScore: 0
   cpuScore: 0
-  playerText: {fileID: 1190277485}
+  PlayerText: {fileID: 1190277485}
   cpuText: {fileID: 1187303955}
+  palaIzquierda: {fileID: 432491928}
+  palaDerecha: {fileID: 727447511}
 --- !u!1 &255684727
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,11 +798,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 432491928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc022ad80e354d04291e1a2585c6d5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 342a21a2999f66140899ad00e641947c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 15
-  speed: 8
+  ballPosition: {fileID: 148365854}
+  cpuSpeed: 5
+  learningRate: 0.1
+  discountFactor: 0.9
 --- !u!1 &512728394
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +832,7 @@ Transform:
   m_GameObject: {fileID: 512728394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -3.03, y: -0.21, z: 9.9395275}
+  m_LocalPosition: {x: -4.54, y: 15.61, z: 9.9395275}
   m_LocalScale: {x: 18, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
